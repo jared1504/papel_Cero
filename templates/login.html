@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="class="w-50 p-3"">
+<h1 class="text-center padding:30rem">Login</h1>
+{% with mensajes=get_flashed_messages() %}
+{% if mensajes %}
+{% for mensaje in mensajes %}
+{% for text in mensaje %}
+<div class="alert alert-danger" role="alert">
+    <p class="text-center h3">{{ text }}</p>
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="/loguear" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="correo@dominio.com" name="email">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="password" placeholder="Contraseña" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+</div>
+{% endblock %}

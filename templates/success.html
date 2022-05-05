@@ -1,0 +1,17 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+{% with mensajes=get_flashed_messages() %}
+{% if mensajes %}
+{% for mensaje in mensajes %}
+    <div class="alert alert-success" role="alert">
+        <p class="text-center h3">{{ mensaje }}</p>
+    </div>
+
+{% endfor %}    
+{% endif %}
+{% endwith %}
+
+
+{% endblock %}

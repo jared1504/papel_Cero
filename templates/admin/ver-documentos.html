@@ -1,0 +1,47 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+
+<h1 class="text-center padding:30rem">Documentos</h1>
+<div class="container-sm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Fecha de creación</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documentos %}
+            <tr>
+                <th scope="row">{{doc[0]}}</th>
+                <td>{{doc[1]}}</td>
+                <td>{{doc[2]}}</td>
+                <td>{{doc[4]}}</td>
+                <td>
+                    <div class="row">
+                    <form action="/admin/verDetalle" method="GET" class="col-sm">
+                        <input name="documento" type="hidden" value={{doc[0]}}>
+                        <button type="submit" class="btn btn-success">Ver Detalles</button>
+                    </form>
+                    <form action="/admin/verPDF" method="GET" class="col-sm">
+                        <input name="nombre" type="hidden" value={{doc[3]}}>
+                        <button type="submit" class="btn btn-primary">Ver PDF</button>
+                    </form>
+                </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+</div>
+{% endblock %}

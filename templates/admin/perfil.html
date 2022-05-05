@@ -1,0 +1,41 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<h1 class="text-center">Usuario</h1>
+{% with mensajes=get_flashed_messages() %}
+{% if mensajes %}
+{% for mensaje in mensajes%}
+{% for text in mensaje%}
+<div class="alert alert-danger" role="alert">
+  <p class="text-center h3">{{text}}</p>
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="container-sm">
+ 
+  <form class="row g-3">
+    <div class="col-sm-4">
+      <label for="nombre" class="form-label">Nombre(s)</label>
+      <input type="text" class="form-control" id="nombre"  placeholder="Nombre(s)" disabled value={{perfil[0]}}>
+    </div>
+    <div class="col-sm-4">
+      <label for="paterno" class="form-label">A. Paterno</label>
+      <input type="text" class="form-control" id="paterno"  placeholder="Apellido Paterno" disabled value={{perfil[1]}}>
+    </div>
+    <div class="col-sm-4">
+      <label for="materno" class="form-label">A. Materno</label>
+      <input type="text" class="form-control" id="materno"  placeholder="Apellido Materno" disabled value={{perfil[2]}}>
+    </div>
+    <div class="col-sm-6">
+      <label for="curp" class="form-label">CURP</label>
+      <input type="text" class="form-control" id="curp"  placeholder="CURP" disabled value={{perfil[3]}}>
+    </div>
+    <div class="col-sm-6">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="text" class="form-control" id="email" name="correo" placeholder="Correo Electrónico" value={{perfil[4]}}>
+    </div>
+  
+  </form>
+</div>
+{% endblock %}

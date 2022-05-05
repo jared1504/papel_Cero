@@ -1,0 +1,57 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+{% with mensajes=get_flashed_messages() %}
+{% if mensajes %}
+{% for mensaje in mensajes %}
+
+{% for text in mensaje %}
+<div class="alert alert-danger" role="alert">
+    <p class="text-center h3">{{ text }}</p>
+</div>
+{% endfor %}
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h1 class="text-center padding:30rem">Agregar Documento</h1>
+<div class="container-sm">
+    <form action="/admin/guardar_documento" method="POST" enctype="multipart/form-data">
+        <div class="row mb-3">
+            <label for="titulo" class="col-sm-2 col-form-label">Titulo Documento</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="titulo" name="titulo">
+            </div>
+            
+        </div>
+        <div class="row mb-3">
+            <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" aria-label="With textarea" name="descripcion"></textarea>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="descripcion" class="col-sm-2 col-form-label">Archivo</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" name="archivo" accept="application/pdf">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="descripcion" class="col-sm-2 col-form-label">Usuario</label>
+            <div class="col-sm-10">
+                <select class="form-select" name="usuario" aria-label="Default select example">
+                    <option value=0 selected>Seleccionar Usuario</option>
+                    {% for usuario in usuarios %}
+                    <p>{{ usuario[0] }}</p>
+                    <option value="{{usuario[0]}}">{{usuario[1]+" "+usuario[2]+" "+usuario[3]}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Documento</button>
+    </form>
+</div>
+{% endblock %}

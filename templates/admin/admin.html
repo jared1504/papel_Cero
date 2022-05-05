@@ -1,0 +1,14 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<h1 class="text-center">Administrador de PapelCero</h1>
+{% with mensaje=get_flashed_messages() %}
+{% if mensaje %}
+{% for text in mensaje %}
+<div class="alert alert-success" role="alert">
+  <p class="text-center h3">{{ text }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<p>Aquí puedes agregar documentos para que los participantes firmen</p>
+{% endblock %}

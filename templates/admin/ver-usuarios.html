@@ -1,0 +1,44 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<a href="/admin/agregar-usuario"> <button type="submit" class="btn btn-success">Agregar Usuario</button></a>
+<h1 class="text-center padding:30rem">Usuarios</h1>
+<div class="container-sm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">CURP</th>
+                <th scope="col">Email</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <th scope="row">{{usuario[0]}}</th>
+                <td>{{usuario[1]+" "+usuario[2]+" "+usuario[3]}}</td>
+                <td>{{usuario[4]}}</td>
+                <td>{{usuario[5]}}</td>
+                <td>
+                    <div class="row">
+                    <form action="/admin/verUsuario" method="GET" class="col-sm">
+                        <input name="usuario" type="hidden" value={{usuario[0]}}>
+                        <button type="submit" class="btn btn-primary">Ver Usuario</button>
+                    </form>
+                </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+</div>
+{% endblock %}
