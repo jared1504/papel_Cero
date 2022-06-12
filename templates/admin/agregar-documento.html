@@ -39,15 +39,30 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="descripcion" class="col-sm-2 col-form-label">Usuario</label>
+            <label for="descripcion" class="col-sm-2 col-form-label">Seleccionar Usuarios Firmantes</label>
             <div class="col-sm-10">
+                {% for usuario in usuarios %}
+                <!--
+                    <p>{{ usuario[0] }}</p>
+                    <option value="{{usuario[0]}}">{{usuario[1]+" "+usuario[2]+" "+usuario[3]}}</option>
+                    id, nombre, aPaterno, aMaterno
+                  -->  
+                    <div class="form-check" name="usuario">
+                        <input type="checkbox" id="{{ usuario[0] }}"  value="{{ usuario[0] }}"/ name="{{ usuario[0] }}">
+                        <label class="form-check-label" for="{{ usuario[0] }}">
+                            {{usuario[1]+" "+usuario[2]+" "+usuario[3]}}
+                        </label>
+                    </div>
+                {% endfor %}
+                
+<!--
                 <select class="form-select" name="usuario" aria-label="Default select example">
                     <option value=0 selected>Seleccionar Usuario</option>
                     {% for usuario in usuarios %}
                     <p>{{ usuario[0] }}</p>
                     <option value="{{usuario[0]}}">{{usuario[1]+" "+usuario[2]+" "+usuario[3]}}</option>
                     {% endfor %}
-
+-->
                 </select>
             </div>
         </div>

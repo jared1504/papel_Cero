@@ -133,7 +133,8 @@ class Usuario:
     def publicKey():
         cur = mysql.connection.cursor()
         cur.execute("SELECT publicKey FROM usuarios WHERE id='"+str(session['id'])+"'")
-        return cur.fetchone()[0]
+        k=cur.fetchone()[0]
+        return k
 
 
     def obtenerUsuario(id):

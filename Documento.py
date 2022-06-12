@@ -20,8 +20,8 @@ class Documento:
             mensajes.append('Debe ingresar una Descripcion')
         if not Documento.archivo:
             mensajes.append('Debe adjuntar un archivo')
-        if Documento.usuarios == "0":
-            mensajes.append('Debe seleccionar un usuario')
+        if Documento.usuarios == []:
+            mensajes.append('Debe seleccionar por lo menos un usuario')
         return mensajes
 
     def crearDocumento():
@@ -31,10 +31,11 @@ class Documento:
                     (Documento.titulo, Documento.descripcion, nombre_unico, datetime.today()))
         mysql.connection.commit()
         idDocumento = cur.lastrowid
-        
-        cur.execute('INSERT INTO usuarios_documentos (idUsuario,idDocumento) VALUES (%s,%s)',
-                    (Documento.usuarios, idDocumento))
-        mysql.connection.commit()
+        for u in Documento.usuarios:
+            cur.execute('INSERT INTO usuarios_documentos (idUsuario,idDocumento) VALUES (%s,%s)',
+                    (u, idDocumento))
+            mysql.connection.commit()
+
         Documento.archivo.save(os.path.join("Archivos/"+ nombre_unico+".pdf"))
         
     def where(estado):
@@ -47,16 +48,17 @@ class Documento:
 
     def all(estado):
         cur = mysql.connection.cursor()
-        sql="SELECT d.* FROM documentos as d, usuarios_documentos as ud WHERE ud.idDocumento=d.id AND ud.estado = "+str(estado)
-        print(sql)
+        sql="SELECT * FROM documentos WHERE estado = "+str(estado)
         cur.execute(sql)
-        return cur.fetchall()
+        id=0
+        documentos=cur.fetchall()
+        return documentos
     
     def detalleDocumento(id):
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM documentos WHERE id='"+id+"' LIMIT 1")
         doc = cur.fetchone()
-        cur.execute("SELECT u.id,u.nombre,u.aPaterno,u.aMaterno FROM usuarios as u, usuarios_documentos as ud "
+        cur.execute("SELECT u.id,u.nombre,u.aPaterno,u.aMaterno, ud.estado, ud.fechaFirma FROM usuarios as u, usuarios_documentos as ud "
                     + "WHERE u.id = ud.idUsuario AND ud.idDocumento ='"+id+"'")
         users = cur.fetchall()
 

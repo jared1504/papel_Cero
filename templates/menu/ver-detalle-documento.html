@@ -40,13 +40,22 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nombre Completo</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha de la firma</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for user in usuarios %}
                         <tr>
-                            <th scope="row">{{user[0]}}</th>
+                            <td>{{user[0]}}</td>
                             <td>{{user[1]+" "+user[2]+" "+user[3]}}</td>
+                            {% if user[4]==0 %}
+                            <td>Pendiente</td>
+                            <td>---------</td>
+                            {% else %}
+                            <td>Firmado</td>
+                            <td>{{user[5]}}</td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
